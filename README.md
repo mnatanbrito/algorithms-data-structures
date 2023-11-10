@@ -59,6 +59,9 @@ export default function bs_list(haystack, needle) {
 
 ### Two sum
 > Given a list of numbers and a number k, return whether any two numbers from the list add up to k. For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17. Bonus: Can you do this in one pass?
+
+Naive approach would be to just have two nested loops interating through the array. If the elements pointed by the outter and inner indexes add up to `k`, return true. But this would be O(n^2) time complexity. Usually a good approach in converting O(n^2) algorithms to O(n) algorithms is by using a hashmap and applying multiple passes.
+
 ```js
 var twoSum = function(nums, target) {
     const map = {};
