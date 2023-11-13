@@ -59,7 +59,7 @@ function bs_list(haystack, needle) {
 
 #### Bubble sort
 
-Time complexity: O(n^2).
+Time complexity: O(n^2). Space complexity: O(1).
 
 The idea behind is that the values will "bubble up" to their respective places inside the collection. This can be achieved by iterating through the collection with a nested loop that will check if the previous element is bigger than the current element. If yes, then a swap is applied.
 
