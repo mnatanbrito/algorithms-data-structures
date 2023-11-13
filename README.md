@@ -11,7 +11,7 @@ Space complexity: O(1).
 
 Iterate through the whole collection one by one. When the current element is the one you're looking for, return it and stop executing.
 ```js
-export default function linear_search(haystack, needle) {
+function linear_search(haystack, needle) {
     for (let i = 0; i < haystack.length; i++) {
         if (haystack[i] === needle) {
             return true
@@ -33,7 +33,7 @@ Binary search creates a "window" inside the original collection and searches in 
 
 Then, inside this window we determine the middle element and use it for comparisons. Next, depending whether the element we're looking for is greather than or less than the middle element, we update the "window" to either the elements in the left or the right of the middle element.
 ```js
-export default function bs_list(haystack, needle) {
+function bs_list(haystack, needle) {
     let lo = 0;
     let hi = haystack.length;
 
@@ -55,6 +55,37 @@ export default function bs_list(haystack, needle) {
 
 ```
 
+### Sorting
+
+#### Bubble sort
+
+Time complexity: O(n^2).
+
+The idea behind is that the values will "bubble up" to their respective places inside the collection. This can be achieved by iterating through the collection with a nested loop that will check if the previous element is bigger than the current element. If yes, then a swap is applied.
+
+At the end of each iteration of the inner loop, we know the biggest element that's not currently at its appropriate place will be moved to its appropriate index.
+
+```js
+function bubble_sort(arr){
+  let n = arr.length;
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 1; j < n; j++) {
+      if (arr[j - 1] > arr[j]) {
+        // should swap
+        let tmp = arr[j - 1];
+        arr[j - 1] = arr[j];
+        arr[j] = tmp;
+      }
+    }
+
+    n -= 1;
+  }
+
+  return arr
+}
+```
+
 ## Famous problems
 
 ### Two sum
@@ -63,7 +94,7 @@ export default function bs_list(haystack, needle) {
 Naive approach would be to just have two nested loops interating through the array. If the elements pointed by the outter and inner indexes add up to `k`, return true. But this would be O(n^2) time complexity. Usually a good approach in converting O(n^2) algorithms to O(n) algorithms is by using a hashmap and applying multiple passes.
 
 ```js
-var twoSum = function(nums, target) {
+function twoSum(nums, target) {
     const map = {};
 
     // first pass only adds each element as key and its index as value
@@ -81,6 +112,6 @@ var twoSum = function(nums, target) {
 
 
     return [];
-};
+}
 ```
 
