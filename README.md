@@ -115,3 +115,34 @@ function twoSum(nums, target) {
 }
 ```
 
+## Data structures
+
+### Queue
+A queue is a __First in First Out (FIFO)__ linked list. That means when adding an element to the queue, it will be added to the end (or tail) of the queue. Conversely, when removing an item from the queue, the first item (the head) is removed. Formally, queues support the following operations:
+- __enqueue__: adds an item to the tail of the list
+- __deque__: removes the head of the list
+- __peek__: returns the head of the list without removing it
+
+#### Enqueue
+
+##### Before
+![Queue before addition](/imgs/queue_before_addition.png)
+
+##### After
+![Queue before addition](/imgs/queue_after_addition.png)
+
+#### Deque
+
+##### Before
+![Queue before addition](/imgs/queue_before_removal.png)
+
+##### After
+![Queue before addition](/imgs/queue_after_removal.png)
+
+#### Runtime
+
+| Operation  | Complexity |
+| ------------- | ------------- |
+| Read  | O(n)  |
+| Insert  | O(1)  |
+| Delete  | O(1)  |
