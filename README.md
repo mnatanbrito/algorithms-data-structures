@@ -1,4 +1,5 @@
 # algorithms-data-structures
+
 Cheat sheet of algorithms and data structures
 
 ## Algorithms
@@ -6,10 +7,12 @@ Cheat sheet of algorithms and data structures
 ### Search
 
 #### Linear search
+
 Time complexity: O(n).
 Space complexity: O(1).
 
 Iterate through the whole collection one by one. When the current element is the one you're looking for, return it and stop executing.
+
 ```js
 // returns true if the value was found and false otherwise.
 function linear_search_boolean(list, value) {
@@ -43,6 +46,7 @@ function linear_search_index(list, value) {
 ```
 
 #### Binary search
+
 Time complexity: O(log n).
 Space complexity: O(1).
 
@@ -51,6 +55,7 @@ If the collection is sorted, binary search can be used.
 Binary search creates a "window" inside the original collection and searches in this window. The window is determined by a low and high indexes. Low index is initially set to 0 and high index is set to `length - 1`.
 
 Then, inside this window we determine the middle element and use it for comparisons. Next, depending whether the element we're looking for is greather than or less than the middle element, we update the "window" to either the elements in the left or the right of the middle element.
+
 ```js
 // returns true if the value was found and false otherwise.
 function binary_search_boolean(list, value) {
@@ -162,6 +167,7 @@ function binary_search_index_recursion(list, value) {
   }
 }
 ```
+
 </details>
 
 ### Sorting
@@ -175,83 +181,92 @@ The idea behind is that the values will "bubble up" to their respective places i
 At the end of each iteration of the inner loop, we know the biggest element that's not currently at its appropriate place will be moved to its appropriate index.
 
 ```js
-function bubble_sort(arr){
-  let n = arr.length;
+function bubble_sort(list) {
+  let right = list.length;
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 1; j < n; j++) {
-      if (arr[j - 1] > arr[j]) {
+  for (let i = 0; i < list.length; i++) {
+    for (let j = 1; j < right; j++) {
+      if (list[j - 1] > list[j]) {
         // should swap
-        let tmp = arr[j - 1];
-        arr[j - 1] = arr[j];
-        arr[j] = tmp;
+        let tmp = list[j - 1];
+        list[j - 1] = list[j];
+        list[j] = tmp;
       }
     }
 
-    n -= 1;
+    right -= 1;
   }
 
-  return arr
+  return list;
 }
 ```
 
 ## Famous problems
 
 ### Two sum
+
 > Given a list of numbers and a number k, return whether any two numbers from the list add up to k. For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17. Bonus: Can you do this in one pass?
 
 Naive approach would be to just have two nested loops interating through the array. If the elements pointed by the outter and inner indexes add up to `k`, return true. But this would be O(n^2) time complexity. Usually a good approach in converting O(n^2) algorithms to O(n) algorithms is by using a hashmap and applying multiple passes.
 
 ```js
 function twoSum(nums, target) {
-    const map = {};
+  const map = {};
 
-    // first pass only adds each element as key and its index as value
-    for (let i = 0; i < nums.length; i++) {
-        map[nums[i]] = i;
+  // first pass only adds each element as key and its index as value
+  for (let i = 0; i < nums.length; i++) {
+    map[nums[i]] = i;
+  }
+
+  // second pass checks the complements
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+    if (
+      Object.keys(map).includes(String(complement)) &&
+      map[complement] !== i
+    ) {
+      return [i, map[complement]];
     }
+  }
 
-    // second pass checks the complements
-    for (let i = 0; i < nums.length; i++) {
-        const complement = target - nums[i];
-        if (Object.keys(map).includes(String(complement)) && map[complement] !== i) {
-            return [i, map[complement]]
-        }
-    }
-
-
-    return [];
+  return [];
 }
 ```
 
 ## Data structures
 
 ### Queue
-A queue is a __First in First Out (FIFO)__ linked list. That means when adding an element to the queue, it will be added to the end (or tail) of the queue. Conversely, when removing an item from the queue, the first item (the head) is removed. Formally, queues support the following operations:
-- __enqueue__: adds an item to the tail of the list
-- __deque__: removes the head of the list
-- __peek__: returns the head of the list without removing it
+
+A queue is a **First in First Out (FIFO)** linked list. That means when adding an element to the queue, it will be added to the end (or tail) of the queue. Conversely, when removing an item from the queue, the first item (the head) is removed. Formally, queues support the following operations:
+
+- **enqueue**: adds an item to the tail of the list
+- **deque**: removes the head of the list
+- **peek**: returns the head of the list without removing it
 
 #### Enqueue
 
 ##### Before
+
 ![Queue before addition](/imgs/queue_before_addition.png)
 
 ##### After
+
 ![Queue before addition](/imgs/queue_after_addition.png)
 
 #### Deque
 
 ##### Before
+
 ![Queue before addition](/imgs/queue_before_removal.png)
 
 ##### After
+
 ![Queue before addition](/imgs/queue_after_removal.png)
 
 #### Runtime
 
-| Operation  | Complexity |
-| ------------- | ------------- |
-| Read  | O(n)  |
-| Insert  | O(1)  |
-| Delete  | O(1)  |
+| Operation | Complexity |
+| --------- | ---------- |
+| Read      | O(n)       |
+| Insert    | O(1)       |
+| Delete    | O(1)       |
