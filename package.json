@@ -1,0 +1,28 @@
+{
+  "name": "algorithms-data-structures",
+  "version": "1.0.0",
+  "description": "Cheat sheet of algorithms and data structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnatanbrito/algorithms-data-structures.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mnatanbrito/algorithms-data-structures/issues"
+  },
+  "homepage": "https://github.com/mnatanbrito/algorithms-data-structures#readme",
+  "dependencies": {
+    "jest": "^29.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "babel-jest": "^29.7.0"
+  }
+}

@@ -11,16 +11,35 @@ Space complexity: O(1).
 
 Iterate through the whole collection one by one. When the current element is the one you're looking for, return it and stop executing.
 ```js
-function linear_search(haystack, needle) {
-    for (let i = 0; i < haystack.length; i++) {
-        if (haystack[i] === needle) {
-            return true
-        }
-    }
+// returns true if the value was found and false otherwise.
+function linear_search_boolean(list, value) {
+  if (!list) {
+    return false;
+  }
 
-    return false
+  for (const item of list) {
+    if (item === value) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
+// returns the index at which the value was found or -1 if the value was not found.
+function linear_search_index(list, value) {
+  if (!list) {
+    return -1;
+  }
+
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] === value) {
+      return i;
+    }
+  }
+
+  return -1;
+}
 ```
 
 #### Binary search
@@ -33,27 +52,117 @@ Binary search creates a "window" inside the original collection and searches in 
 
 Then, inside this window we determine the middle element and use it for comparisons. Next, depending whether the element we're looking for is greather than or less than the middle element, we update the "window" to either the elements in the left or the right of the middle element.
 ```js
-function bs_list(haystack, needle) {
-    let lo = 0;
-    let hi = haystack.length;
-
-    do {
-        let m = Math.floor(lo + (hi - lo) / 2)
-        let v = haystack[m];
-
-        if (v === needle) {
-            return true;
-        } else if (v > needle) {
-            hi = m;
-        } else {
-            lo = m + 1;
-        }
-    } while (lo < hi);
-
+// returns true if the value was found and false otherwise.
+function binary_search_boolean(list, value) {
+  if (!list) {
     return false;
+  }
+
+  let left = 0;
+  let right = list.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const midValue = list[mid];
+    if (midValue === value) {
+      return true;
+    } else if (value > midValue) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return false;
 }
 
+// returns the index at which the value was found or -1 if the value was not found.
+function binary_search_index(list, value) {
+  if (!list) {
+    return -1;
+  }
+
+  let left = 0;
+  let right = list.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const midValue = list[mid];
+    if (midValue === value) {
+      return mid;
+    } else if (value > midValue) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return -1;
+}
 ```
+
+<details>
+<summary>Recursive version</summary>
+
+```js
+// returns true if the value was found and false otherwise.
+function binary_search_boolean_recursion(list, value) {
+  if (!list) {
+    return false;
+  }
+
+  const left = 0;
+  const right = list.length - 1;
+  const mid = Math.floor((left + right) / 2);
+  const midValue = list[mid];
+
+  if (midValue === value) {
+    return true;
+  } else if (value > midValue) {
+    return list.length <= 1
+      ? false
+      : binary_search_boolean_recursion(list.slice(mid + 1), value);
+  } else {
+    return list.length <= 1
+      ? false
+      : binary_search_boolean_recursion(list.slice(0, mid), value);
+  }
+}
+
+// returns the index at which the value was found or -1 if the value was not found.
+function binary_search_index_recursion(list, value) {
+  if (!list) {
+    return -1;
+  }
+
+  const left = 0;
+  const right = list.length - 1;
+  const mid = Math.floor((left + right) / 2);
+  const midValue = list[mid];
+
+  if (midValue === value) {
+    return mid;
+  } else if (value > midValue) {
+    if (list.length <= 1) {
+      return -1;
+    } else {
+      const sub_array_index = binary_search_index_recursion(
+        list.slice(mid + 1),
+        value
+      );
+
+      return sub_array_index !== -1
+        ? mid + 1 + sub_array_index
+        : sub_array_index;
+    }
+  } else {
+    return list.length <= 1
+      ? mid
+      : binary_search_index_recursion(list.slice(0, mid), value);
+  }
+}
+```
+</details>
 
 ### Sorting
 
