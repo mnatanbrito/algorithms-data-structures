@@ -2,6 +2,9 @@
 
 Cheat sheet of algorithms and data structures
 
+## References
+- [TheAlgorithms](https://github.com/TheAlgorithms/JavaScript)
+
 ## Algorithms
 
 ### Search
