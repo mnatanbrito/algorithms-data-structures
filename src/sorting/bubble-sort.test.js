@@ -1,17 +1,19 @@
 function bubble_sort(list) {
-  let right = list.length;
+  /**
+   * Main idea is to have two nested loops iterating through the array
+   * the outer loop (i) will essentially keep track of how many elements have bubbled up
+   * the inner loop (j) will iterate through the elements from 0 to i and compare j with j+1 swapping when needed
+   */
 
   for (let i = 0; i < list.length; i++) {
-    for (let j = 1; j < right; j++) {
-      if (list[j - 1] > list[j]) {
+    for (let j = 0; j < list.length - i - 1; j++) {
+      if (list[j] > list[j + 1]) {
         // should swap
-        let tmp = list[j - 1];
-        list[j - 1] = list[j];
-        list[j] = tmp;
+        let tmp = list[j];
+        list[j] = list[j + 1];
+        list[j + 1] = tmp;
       }
     }
-
-    right -= 1;
   }
 
   return list;
